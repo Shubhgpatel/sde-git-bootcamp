@@ -30,5 +30,12 @@ app.put('/tasks/:id', (req, res) => {
   res.json(task);
 });
 
+app.delete('/tasks/:id', (req, res) => {
+  const index = tasks.findIndex(t => t.id === parseInt(req.params.id));
+  if (index === -1) return res.status(404).json({ error: 'Not found' });
+  tasks.splice(index, 1);
+  res.status(204).send();
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
