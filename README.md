@@ -6,3 +6,5 @@ npm install
 
 ## Run
 npm start
+
+## Contributors
