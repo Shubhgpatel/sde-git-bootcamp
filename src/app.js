@@ -9,6 +9,9 @@ app.get('/tasks', (req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
+  if (!req.body.title) {
+    return res.status(400).json({ error: 'Title is required' });
+  }
   const task = {
     id: tasks.length + 1,
     title: req.body.title,
