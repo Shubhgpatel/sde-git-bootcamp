@@ -22,5 +22,13 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(task);
 });
 
+app.put('/tasks/:id', (req, res) => {
+  const task = tasks.find(t => t.id === parseInt(req.params.id));
+  if (!task) return res.status(404).json({ error: 'Not found' });
+  task.title = req.body.title || task.title;
+  task.status = req.body.status || task.status;
+  res.json(task);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
