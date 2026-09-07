@@ -16,6 +16,7 @@ app.post('/tasks', (req, res) => {
     id: tasks.length + 1,
     title: req.body.title,
     status: 'todo',
+    priority: req.body.priority || 'medium',
     createdAt: new Date().toISOString()
   };
   tasks.push(task);
@@ -27,6 +28,7 @@ app.put('/tasks/:id', (req, res) => {
   if (!task) return res.status(404).json({ error: 'Not found' });
   task.title = req.body.title || task.title;
   task.status = req.body.status || task.status;
+  task.priority = req.body.priority || task.priority;
   res.json(task);
 });
 
